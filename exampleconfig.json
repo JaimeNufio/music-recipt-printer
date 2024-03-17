@@ -1,8 +1,8 @@
 {
-  "lastfm":{
-    "APIKEY":"",
-    "SECRET":"",
-    "USER":"",
-    "PASSWORD":""
+  "lastfm": {
+    "API_KEY": "your_api_key",
+    "SECRET": "your_secret",
+    "USER": "your_username",
+    "PASSWORD": "your_password"
   }
 }
