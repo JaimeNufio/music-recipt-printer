@@ -12,7 +12,7 @@ resized_image.save("b.jpg")
 # """ Seiko Epson Corp. Receipt Printer (EPSON TM-T88III) """
 p = Usb(0x04b8, 0x0202, 0, profile="TM-T88III")
 p.text("-----\n")
-p.image('b.jpg')
+p.image('album.jpeg')
 p.text("12345678901234567890123456789012\n")
 p.text("----\n")
 # Cut the paper

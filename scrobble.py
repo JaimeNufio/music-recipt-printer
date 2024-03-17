@@ -4,8 +4,7 @@ import json
 from PIL import Image, ImageDraw, ImageFont
 import requests
 from io import BytesIO
-
-
+import math
 
 # Last.fm credentials
 API_KEY = "your_api_key"
@@ -45,9 +44,10 @@ def check_for_scrobbles():
 
             artist = now_playing.get_artist().name
             album = now_playing.get_album().title
+            track = now_playing.title
             img = now_playing.get_cover_image()
 
-            add_text_to_image(img, album+"", (200, 50) )
+            add_text_to_image(img, album, artist, track, (200, 50) )
             print(now_playing,'\n',artist,'\n',album,'\n',img,'\n','\n')
             time.sleep(3)
         else:
@@ -59,7 +59,7 @@ def load_image_from_url(url):
     image = Image.open(BytesIO(response.content))
     return image
 
-def add_text_to_image(image_url, text, position, font_size=20, font_color=(0,0,0), font_path=None):
+def add_text_to_image(image_url, album, artist, track, position, font_size=24, font_color=(0,0,0), font_path=None):
 
     # response = requests.get(image_url)
     # image = Image.open(BytesIO(response.content))
@@ -67,21 +67,27 @@ def add_text_to_image(image_url, text, position, font_size=20, font_color=(0,0,0
 
     # Create a blank image with the desired dimensions
     final_width = 512
-    final_height = 200
+    final_height = 128
     background_color = (255, 255, 255)  # White background
     final_image = Image.new("RGB", (final_width, final_height), background_color)
 
     # Resize and paste the icon on the left side with padding
     padding = 3
-    icon_size = (final_height - padding, final_height - padding)
+    icon_size = (final_height - padding*2, final_height - padding*2)
     final_image.paste(icon.resize(icon_size), (padding, padding))
 
     # Draw text on the right side
     draw = ImageDraw.Draw(final_image)
-    font = ImageFont.load_default()  # You can also specify a custom font here
-    text = "Hello World"
+    print(len(album))
+    font_scale = 24 #if math.floor(len(album)//1.5) < 24 else math.floor(len(album)//1.5) 
+
+    font = ImageFont.truetype("verdana.ttf", font_scale ) #font_size)
+    text = track # + " - " + artist + "\n" + album
     text_width, text_height = draw.textsize(text, font=font)
-    text_position = ((final_width - text_width) // 2, (final_height - text_height) // 2)  # Center the text vertically
+
+    # text_position = ((final_width - text_width) // 2, (final_height - text_height) // 2)  # Center the text vertically
+    
+    text_position = (final_height+padding,padding)
     draw.text(text_position, text, fill=(0, 0, 0), font=font)  # Fill with black color
 
     final_image.save('album.jpeg')
