@@ -50,7 +50,7 @@ def check_for_scrobbles():
 
         if now_playing and not last_track == now_playing.title:
             artist = shorten_string(now_playing.get_artist().name)
-            album = shorten_string(now_playing.get_album().title)
+            album = shorten_string(now_playing.get_album().title,maxSize=60)
             track = shorten_string(now_playing.title)
             img = now_playing.get_cover_image()
 
