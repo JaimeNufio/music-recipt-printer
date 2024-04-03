@@ -1,5 +1,7 @@
-from escpos.printer import Usb
+from escpos import printer
 import json
+import serial
+import time
 
 class POS_Printer:
 
@@ -10,15 +12,18 @@ class POS_Printer:
     with open('config.json','r') as file:
       data = json.load(file)['printer']
 
-      self.VID = int(data['VID'], 16)
-      self.PID = int(data['PID'], 16)
+      self.VID = bytes.fromhex(data['VID'])
+      self.PID = bytes.fromhex(data['PID'])
 
+    print(self.VID,self.PID)
 
-    self.printer = Usb(
+    self.printer = printer.Usb(
       self.VID,
       self.PID,
       0
     )
+    # self.printer = printer.Serial('COM1')
+
     self.printer.cut()
 
   def print(self, path):

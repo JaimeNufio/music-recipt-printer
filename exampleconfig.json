@@ -1,8 +1,12 @@
 {
   "lastfm": {
-    "API_KEY": "your_api_key",
+    "APIKEY": "your_api_key",
     "SECRET": "your_secret",
     "USER": "your_username",
     "PASSWORD": "your_password"
-  }
+  },
+  "printer":{
+    "PID":"",
+    "VID":""
+}
 }
