@@ -22,7 +22,7 @@ Spotify Wrapped is always a big time of the year for music lovers; there is clea
  
 0) Clone this repo, `cd` into it. run `pip  install -r requirements.txt`
 
-1) Before you can run the program, you must get the printers Windows drivers correctly installed (you may need Zadig to install drivers) and must have also installed the EPSON printer's drivers on your machine. [This guide was really helpful.](https://nyorikakar.medium.com/printing-with-python-and-epson-pos-printer-fbd17e127b6c)
+1) Before you can run the program, you must get the printers Windows drivers correctly installed (you may need Zadig to install drivers) and must have also installed the EPSON printer's drivers on your machine. [This guide was really helpful. (Particularly the part about modifying the library manually yourself.)](https://nyorikakar.medium.com/printing-with-python-and-epson-pos-printer-fbd17e127b6c)
 
     - [EPSON Drivers can be found here](https://epson.com/Support/Point-of-Sale/OmniLink-Printers/Epson-TM-T88VI-Series/s/SPT_C31CE94061?review-filter=Windows+10+64-bit).
 
