@@ -42,6 +42,7 @@ def print_new_scrobble(track):
 # Function to continuously check for new scrobbles
 def check_for_scrobbles():
     global last_track
+    nothingPlaying = False
 
     while True:
 
@@ -49,20 +50,26 @@ def check_for_scrobbles():
         now_playing = user.get_now_playing()
 
         if now_playing and not last_track == now_playing.title:
-            artist = shorten_string(now_playing.get_artist().name)
-            album = shorten_string(now_playing.get_album().title,maxSize=60)
-            track = shorten_string(now_playing.title)
-            img = now_playing.get_cover_image()
+            try:
+                nothingPlaying = False
+                artist = shorten_string(now_playing.get_artist().name)
+                album = shorten_string(now_playing.get_album().title,maxSize=60)
+                track = shorten_string(now_playing.title)
+                img = now_playing.get_cover_image()
 
-            add_text_to_image(img, album, artist, track )
-            last_track = now_playing.title
-            print("Now Playing: '{}' from '{}' by {}".format(track, album, artist))
-            time.sleep(3)
+                add_text_to_image(img, album, artist, track )
+                last_track = now_playing.title
+                print("Now Playing: '{}' from '{}' by {}".format(track, album, artist))
+                time.sleep(3)
+            except:
+                print("error")
         elif now_playing and last_track == now_playing.title:
-            print(".")
+            # print(".")
             time.sleep(3)
         else:
-            print("Nothing Playing")
+            if (not nothingPlaying):
+                nothingPlaying = True
+                print("Nothing Playing")
             time.sleep(1)  # Check every 10 seconds
 
 def load_image_from_url(url):
