@@ -6,6 +6,7 @@ import requests
 from io import BytesIO
 import math
 from recipt import POS_Printer
+import datetime
 
 # Last.fm credentials
 API_KEY = "your_api_key"
@@ -60,12 +61,12 @@ def check_for_scrobbles():
                 add_text_to_image(img, album, artist, track )
                 last_track = now_playing.title
                 print("Now Playing: '{}' from '{}' by {}".format(track, album, artist))
-                time.sleep(3)
-            except:
-                print("error")
+                time.sleep(1)
+            except Exception as e:
+                print(e)
         elif now_playing and last_track == now_playing.title:
             # print(".")
-            time.sleep(3)
+            time.sleep(1)
         else:
             if (not nothingPlaying):
                 nothingPlaying = True
@@ -86,6 +87,9 @@ def shorten_string(string, maxSize = 32):
 
 def add_text_to_image(image_url, album, artist, track, font_size=22):
 
+    timestamp = datetime.datetime.now().strftime("%m/%d/%y %I:%M%p")    
+    print(timestamp)
+    
     icon = load_image_from_url(image_url)
 
     final_width = 512
@@ -112,6 +116,11 @@ def add_text_to_image(image_url, album, artist, track, font_size=22):
     font = ImageFont.truetype("verdana.ttf", math.floor(font_size*.7))
     track_title = artist
     text_position = (final_height,final_height-(font_size*1.5))
+    draw.text(text_position, track_title, fill=(0, 0, 0), font=font)  
+
+    font = ImageFont.truetype("verdana.ttf", math.floor(font_size*.7))
+    track_title = timestamp
+    text_position = (final_width-150,final_height-(font_size*1.5))
     draw.text(text_position, track_title, fill=(0, 0, 0), font=font)  
 
     final_image = final_image.convert("L")
