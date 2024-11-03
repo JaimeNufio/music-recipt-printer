@@ -1,5 +1,7 @@
 ## Live Music Scrobble Printer
 
+[Demo Video](https://www.youtube.com/shorts/aHHda0pf8ak)
+
 ### Elevator Pitch ( aka, the '*TL;DR*' )
 
 I thought it'd be neat if I could take the music I'm scrobbling through lastFM, and fed it through a recipt printer. 
